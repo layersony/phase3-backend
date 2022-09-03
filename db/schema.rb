@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_02_230302) do
+ActiveRecord::Schema.define(version: 2022_09_03_005952) do
 
   create_table "events", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "hackthon_id"
+    t.integer "hackathon_id"
   end
 
   create_table "hackathons", force: :cascade do |t|
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2022_09_02_230302) do
     t.string "datetime"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uniq_id", default: "41261153"
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 2022_09_02_230302) do
     t.string "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uniq_id", default: "8424665847"
   end
 
 end
