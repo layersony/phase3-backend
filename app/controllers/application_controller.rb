@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
 
   # get one hackthon
   get "/hackathon/:uniq_id" do 
-    hackathon = Hackathon.find(params[:uniq_id])
+    hackathon = Hackathon.find_by(uniq_id: params[:uniq_id])
     hackathon.to_json
   end
 
@@ -59,7 +59,7 @@ class ApplicationController < Sinatra::Base
   post "/user" do
     existingUser = User.find_by(email: params[:email])
     if existingUser
-      return {"message": "User already exists"}.to_json
+      return {"error": "User already exists"}.to_json
     else
       unique_id = rand(1...9999999999)
       user = User.create(
@@ -86,11 +86,11 @@ class ApplicationController < Sinatra::Base
     hackthon = Hackathon.find_by(uniq_id: params[:uniq_id])
     hackthon.events.find_all do | event |
       event.user_id
-    end.to_json
+    end.to_json(only: [:id], include: {user: {only: [:fullname, :email, :role]}})
   end
 
   # register event
-  post "/register/event" do
+  post "/book/event" do
     hackathon = Hackathon.find_by(uniq_id: params[:hackathon_uniq_id])
     # check if user exists
     existingUser = User.find_by(email: params[:email])
