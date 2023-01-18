@@ -21,7 +21,7 @@ u1 = User.create(
 # create event instance
 e1 = Event.create(
   user_id: u1,
-  hackthon_id: h1
+  hackathon_id: h1
 )
 
 puts "✅ Done seeding!"
